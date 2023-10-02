@@ -53,7 +53,7 @@ export const ControlledInput = () => {
 
     return <input value={parentValue} onChange={onChange}/>
 }
-
+//-----------------------------------------------------------------------------
 export const ControlledCheckbox = () => {
     const [parentValue, setParentValue] = useState(true)
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +62,7 @@ export const ControlledCheckbox = () => {
     //return <input type="checkbox" checked={parentValue} onChange={action("want changes")}/>
     return <input type="checkbox" checked={parentValue} onChange={onChange}/>
 }
-
+//-----------------------------------------------------------------------------
 export const UnControlledSelect = () => {
     return <select>
         <option>none</option>
@@ -71,7 +71,7 @@ export const UnControlledSelect = () => {
         <option value={'3'}>Voznesenskoe</option>
     </select>
 }
-
+//-----------------------------------------------------------------------------
 export const ControlledSelect = () => {
     const [parentValue, setParentValue] = useState<string | undefined>(undefined)
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -85,7 +85,7 @@ export const ControlledSelect = () => {
         <option value={'3'}>Voznesenskoe</option>
     </select>
 }
-
+//-----------------------------------------------------------------------------
 
 export const ControlledInputWithFixedValue = () => <input value={'IT-incubator.by'}/>
 

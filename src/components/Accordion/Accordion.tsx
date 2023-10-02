@@ -1,88 +1,52 @@
 import React, {useState} from "react";
 
-type AccordionPropsType = {
-    titleValue: string,
-    collapsed?: boolean
+type ItemType = {
+    title:string
+    value:any
 }
 
-function Accordion(props: AccordionPropsType) {
+
+type AccordionPropsType = {
+    titleValue: string,
+    collapsed: boolean
+    onChange: () => void
+    items: ItemType[]
+    onClick:(value:any)=>void
+}
+
+export const Accordion = (props: AccordionPropsType) => {
 
     let [collapsed, setCollapsed] = useState(false);
 
-    // const toggleFoo = ()=> { if (!collapsed){setCollapsed(true)}else {setCollapsed(false)}}
-    // console.log(collapsed)
 
-        return (<div>
-            <AccordionTitle callback={()=>{setCollapsed(!collapsed)}} title={props.titleValue}/>
-            {/*<button onClick={toggleFoo}>TOGGLE</button>*/}
-            {collapsed && <AccordionBody/>}
-        </div>)
-    }
+    return (<div>
+        <AccordionTitle title={props.titleValue}
+                        onChange={props.onChange}
+        />
+        {!props.collapsed && <AccordionBody items={props.items} onClick={props.onClick}/>}
+    </div>)
+}
 
 type AccordionTitlePropsType = {
     title: string
-    callback:()=>void
+    onChange: () => void
 }
 
 function AccordionTitle(props: AccordionTitlePropsType) {
-    //console.log("AccordionTitle rendering")
-    return <h3 onClick={props.callback}>{props.title}</h3>
+    return <h3 onClick={props.onChange}>---{props.title}---</h3>
 }
 
-function AccordionBody() {
-   // console.log("AccordionBody rendering")
+type AccordionBodyPropsType = {
+    items: ItemType[]
+    onClick:(value:any)=>void
+}
+const AccordionBody = (props:AccordionBodyPropsType) => {
+
     return <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
+        {props.items.map((el,i)=><li onClick={()=>{props.onClick(el.value)}} key={i}>{el.title}</li>)}
     </ul>
 }
 
-export default Accordion;
 
 
-// if (props.collapsed === true) {
-//     return <div>
-//         <AccordionTitle title={props.titleValue}/>
-//     </div>
-// } else {
-//     return <div>
-//         <AccordionTitle title={props.titleValue}/>
-//         <AccordionBody/>
-//     </div>
-// }
 
-
-// function Accordion(props: AccordionPropsType) {
-//
-//     let [collapsed, setCollapsed] = useState(false);
-//
-//     const toggleFoo = ()=> { if (!collapsed){setCollapsed(true)}else {setCollapsed(false)}}
-//     console.log(collapsed)
-//
-//     return (<div>
-//         <AccordionTitle title={props.titleValue}/>
-//         <button onClick={toggleFoo}>TOGGLE</button>
-//         {collapsed && <AccordionBody/>}
-//     </div>)
-// }
-//
-// type AccordionTitlePropsType = {
-//     title: string
-// }
-//
-// function AccordionTitle(props: AccordionTitlePropsType) {
-//     //console.log("AccordionTitle rendering")
-//     return <h3>{props.title}</h3>
-// }
-//
-// function AccordionBody() {
-//     // console.log("AccordionBody rendering")
-//     return <ul>
-//         <li>1</li>
-//         <li>2</li>
-//         <li>3</li>
-//     </ul>
-// }
-//
-// export default Accordion;
