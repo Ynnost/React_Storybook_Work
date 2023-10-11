@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
-import Accordion from "./components/Accordion/Accordion";
 import {Rating} from "./components/Rating/Rating";
 import OnOff from "./components/OnOff/OnOff";
 import {RatingControlled, RatingValueType} from "./components/Rating/RatingControlled";
-import SelfControlledAccordion from "./components/Accordion/SelfControlledAccordion";
+import {UnControlledAccordion} from "./components/Accordion/UnControlledAccordion";
 import ControlledOnOff from "./components/OnOff/ControlledOnOff";
 
 
@@ -17,16 +16,11 @@ function App() {
     return (
         <div className={'App'}>
 
-            <SelfControlledAccordion
-                onChange={() => {
-                    setAccordionCollapsed(!accordionCollapsed)
-                }}
-                titleValue={'Menu'}
-                collapsed={accordionCollapsed}
+            <UnControlledAccordion
+                titleValue={'Users'}
             />
 
-            <OnOff onChange={setSwitchON}/> {switchON.toString()}
-            <ControlledOnOff on={switchON} onChange={(on)=>{setSwitchON(on)}}/>
+           
 
         </div>
     );

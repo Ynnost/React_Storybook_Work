@@ -1,26 +1,17 @@
-type ItemType = {
-    title: string
-    value: any
+.select span.main {
+  border: 1px solid black;
+  display: inline-block;
+  min-height: 20px;
+  min-width: 40px;
 }
 
-type  SelectPropsType = {
-    value?: any,
-    onChange: (value: any) => void
-    items: ItemType[]
+.items {
+  position: absolute;
+  padding: 5px;
+  border: 1px black solid;
 }
 
-export const Select = (props: SelectPropsType) => {
-
-    const valueSelect = props.items.find(el => el.value === props.value);
-
-    return (
-        <div>
-            <h3>{valueSelect && valueSelect.title}</h3>
-            <select>
-                {props.items.map(el =>
-                    <option key={el.value} value={props.value}>{el.title}</option>
-                )}
-            </select>
-        </div>
-    )
+.item.selected {
+  background-color: blue;
+  color: white;
 }
