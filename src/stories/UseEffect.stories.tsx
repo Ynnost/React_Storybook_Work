@@ -45,7 +45,7 @@ export const SimpleExample = () => {
   );
 };
 
-export const SetTimeoutExample = () => {
+export const SetIntervalExample = () => {
   console.log("SetTimeoutExample");
 
   const [counter, setCounter] = useState(1);
@@ -81,18 +81,14 @@ export const WatchExample = () => {
     let hours = time.getHours();
     let minutes = time.getMinutes();
     let seconds = time.getSeconds();
-    return `${hours < 12 ? "0" + hours : hours}:${
-      minutes < 10 ? "0" + minutes : minutes
-    }:${seconds < 10 ? "0" + seconds : seconds}`;
+    return `${hours < 12 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   };
 
   const [data, setData] = useState(new Date());
 
   useEffect(() => {
-    setInterval(()=>setData(new Date()), 1000);
+    setInterval(() => setData(new Date()), 1000);
   }, []);
-
-  
 
   return (
     <>
@@ -103,4 +99,60 @@ export const WatchExample = () => {
       }
     </>
   );
+};
+
+export const ResetUseEffectExample = () => {
+  console.log("Component render");
+
+  const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    console.log("Effect occourret: " + counter);
+    return () => {
+      console.log("Reset Effect: " + counter);
+    };
+  }, [counter]);
+
+  const increase = () => setCounter(counter + 1);
+
+  return (
+    <>
+      Hello, counter: {counter} <button onClick={increase}>+</button>
+      <br />
+    </>
+  );
+};
+
+export const KeysTrackerExample = () => {
+  const [text, setText] = useState("");
+  console.log("Component render: " + text);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      console.log(e.key);
+      setText(text + e.key);
+    };
+    window.document.addEventListener("keypress", handler);
+    return () => {
+      window.removeEventListener("keypress", handler);
+    };
+  }, [text]);
+
+  return <>Typed text: {text}</>;
+};
+
+export const SetTimeoutExample = () => {
+  const [text, setText] = useState("");
+  console.log("Component render: " + text);
+
+  useEffect(() => {
+    const timeoutIS = setTimeout(() => {
+      setText("3 seconds passed");
+    }, 3000);
+    return () => {
+      clearTimeout(timeoutIS);
+    };
+  }, [text]);
+
+  return <>Typed text: {text}</>;
 };

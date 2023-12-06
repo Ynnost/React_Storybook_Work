@@ -6,10 +6,18 @@ export default {
   component: Clock,
 };
 
-export const Watch = () => {
+export const WatchAnalog = () => {
   return (
     <>
-      <Clock />
+      <Clock mode={"analog"} />
+    </>
+  );
+};
+
+export const WatchDigital = () => {
+  return (
+    <>
+      <Clock mode={"digital"} />
     </>
   );
 };
